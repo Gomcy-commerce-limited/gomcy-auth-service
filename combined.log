@@ -1,0 +1,8 @@
+{"level":"error","service":"user-service"}
+{"level":"error","service":"auth-service"}
+{"level":"error","service":"auth-service"}
+{"level":"error","message":{"endpoint":"/shop-signin","error":{}},"service":"auth-service"}
+{"level":"error","message":{"createdAt":"2024-09-24T03:56:41.006Z","endpoint":"/shop-signin"},"service":"auth-service"}
+{"level":"error","message":{"createdAt":"2024-09-24T04:00:16.737Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
+{"level":"error","message":{"createdAt":"2024-09-24T04:10:13.844Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
+{"level":"error","message":{"createdAt":"2024-09-24T04:11:26.780Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
