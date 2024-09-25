@@ -6,3 +6,4 @@
 {"level":"error","message":{"createdAt":"2024-09-24T04:00:16.737Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
 {"level":"error","message":{"createdAt":"2024-09-24T04:10:13.844Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
 {"level":"error","message":{"createdAt":"2024-09-24T04:11:26.780Z","endpoint":"/shop-signin","error":{}},"service":"auth-service"}
+{"level":"error","message":{"createdAt":"2024-09-24T17:07:14.076Z","endpoint":"/start-shop-session","error":{"code":"42601","file":"scan.l","length":91,"line":"1242","name":"error","position":"43","routine":"scanner_yyerror","severity":"ERROR"}},"service":"auth-service"}

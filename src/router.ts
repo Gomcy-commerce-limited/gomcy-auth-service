@@ -1,14 +1,20 @@
-import { startShopSession } from "controller";
-import customerSignin from "controller/customer-signin.controller";
+import { customerSignin, startShopSession, validateShopSession } from "controller";
 import { Router } from "express";
 import { body } from 'express-validator';
+import { reconstructToken, verifyToken } from "middleware";
 
 const router = Router();
 
-const validateSignin = body("email").isEmail().withMessage("Invalid email") && body("password").isLength({ min: 8 }).withMessage("Password must be at least 6 characters");
-router.post("/customer-signin", validateSignin, customerSignin);
+const validateCustomerSigninBody = body("email").isEmail().withMessage("Invalid email") && body("password").isLength({ min: 8 }).withMessage("Password must be at least 6 characters");
+router.post("/customer-signin", validateCustomerSigninBody, customerSignin);
 
-const validateShopSignin = body("shopId");
-router.post("/shop-signin", validateShopSignin, startShopSession);
+const validateShopSigninBody = body("shopId");
+router.post("/start-shop-session", validateShopSigninBody, startShopSession);
+
+const validateSesionBody = 
+    body("shopId").isString().withMessage("Invalid shopId") 
+    && body("timeLoggedIn").isString().withMessage("Invalid timeLoggedIn")
+    && body("email").isEmail().withMessage("Invalid email");
+router.get("/validate-shop-session", reconstructToken, verifyToken, validateSesionBody, validateShopSession);
 
 export default router;

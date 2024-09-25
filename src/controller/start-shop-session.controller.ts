@@ -20,22 +20,22 @@ const startShopSession = async (req: Request, res: Response) => {
             console.error(validateRes.array().map((error) => error.msg).join(", "));
             throw new Error(validateRes.array().map((error) => error.msg).join(", "));
         }
-        const { shopId, isVerified } = req.body as { shopId: string, isVerified: boolean };
+        const { shopId, email } = req.body as { shopId: string, email: string };
         const timeLoggedIn = new Date().toISOString();
         const query = `INSERT INTO shops (time_logged_in) VALUES $1 WHERE id = $2`;
         const values = [timeLoggedIn, shopId];
         await client.query(query, values);
 
-        const token = generateToken({ shopId, timeLoggedIn, isVerified });
-        const cookies1 = token.slice(0, token.length / 2);
-        const cookies2 = token.slice(token.length / 2);
+        const token = generateToken({ shopId, timeLoggedIn, email });
+        const token1 = token.slice(0, token.length / 2);
+        const token2 = token.slice(token.length / 2);
 
-        res.cookie("cookies1", cookies1, {
+        res.cookie("token1", token1, {
             httpOnly: true,
             secure: true,
             maxAge: 3600000, // 1 hour
         });
-        res.cookie("cookies2", cookies2, {
+        res.cookie("token2", token2, {
             httpOnly: true,
             secure: true,
             maxAge: 3600000, 
@@ -47,7 +47,7 @@ const startShopSession = async (req: Request, res: Response) => {
             createdAt: new Date().toISOString()
         });
 
-        res.status(200).json({ message: "Shop signed in" });
+        res.status(201).json({ message: "Signed in" });
     } catch (error) {
         console.error(`Error: ${error}`);
         logger.error({
